@@ -2,7 +2,7 @@
 
 This is the experiment code for the "Plan and Budget: Effective and Efficient Test-Time Scaling on Large Language Model Reasoning" paper.
 
-![overview](imgs/overview.png)
+![overview](imgs/overview.jpg)
 
 ## Environment Setup
 To setup the environment, the quickest way is to directly install the `vllm` library, which will automatically install all the required dependency. We also have additional dependencies defined in the `requirements.txt` located under the root directory. Follow the listed commands to install a local conda environment named `vllm`:
