@@ -1,0 +1,11 @@
+# Ignore the results
+results/
+
+# Ignore local settings
+.env
+.DS_Store
+.virtual_documents/
+
+# Ignore all caches
+.ipynb_checkpoints/
+__pycache__/
