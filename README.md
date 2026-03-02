@@ -17,13 +17,9 @@
 </div>
 
 
-------------------------------------------------------------------------
-
 <p align="center">
-<img src="imgs/overview.png" width="80%" height="auto"/>
+<img src="imgs/overview.png" width="100%" height="auto"/>
 </p>
-
-------------------------------------------------------------------------
 
 # 📌 Overview
 
