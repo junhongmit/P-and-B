@@ -140,7 +140,7 @@ class TravelPlannerDatasetLoader(BaseDatasetLoader):
         from dataset.TravelPlanner.eval import eval_score
         # Convert natural language plan to JSON first
         system_prompt = """\
-        Please assist me in extracting valid information from a given natural language text and reconstructing it in JSON format, as demonstrated in the following example.
+        Please assist me in extracting valid information from a given natural language text and reconstructing it in a flat JSON in the format of {{"plan": [{{"days": ...}}, .. {{"days": ...}}]}}, as demonstrated in the following example.
         If transportation details indicate a journey from one city to another (e.g., from A to B), the 'current_city' should be updated to the destination city (in this case, B).
         Use a ';' to separate different attractions, with each attraction formatted as 'Name, City'.
         If there's information about transportation, ensure that the 'current_city' aligns with the destination mentioned in the transportation details (i.e., the current city should follow the format 'from A to B').
@@ -192,7 +192,7 @@ class TravelPlannerDatasetLoader(BaseDatasetLoader):
                 "accommodation": "-"
             }}]
         -----EXAMPLE END-----
-        JSON:
+        Output JSON format: {{"plan": [{{"days": ...}}, .. {{"days": ...}}]}}
         """
 
         cutoff = (pred.find("</think>") + 8) if pred.find("</think>") > 0 else 0
@@ -208,7 +208,7 @@ class TravelPlannerDatasetLoader(BaseDatasetLoader):
         query_data = self.travel_data_dict[query]
 
         try:
-            score, explanation = eval_score(query_data, f'{{"plan":{response}}}')
+            score, explanation = eval_score(query_data, response)
         except Exception as e:
             score, explanation = 0, str(e)
         

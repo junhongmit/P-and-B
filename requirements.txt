@@ -1,6 +1,7 @@
 evaluate
 absl-py
 rouge-score
+math_verify
 nltk
 latex2sympy2
 word2number

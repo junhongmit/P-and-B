@@ -1,12 +1,12 @@
 from datasets import load_dataset
+import math_verify
 import random
 import textwrap
 from typing import AsyncGenerator, Any, Dict, List
 
 from utils.data import *
 from utils.logger import *
-from utils.math import *
-from utils.qwen_math_parser import *
+from utils.qwen_math_parser import extract_answer, strip_string
 
 class MathDatasetLoader(BaseDatasetLoader):
     _instruction_prompt = "You are a math student being tested on your math problem-solving skills in an exam."
@@ -84,8 +84,9 @@ class MathDatasetLoader(BaseDatasetLoader):
     ):
         pred = strip_string(extract_answer(pred, 'math'))
 
-        ans = memoized_canonical_form(ans)
-        pred = memoized_canonical_form(pred)
-
-        return math_equal(ans, pred), ""
-    
+        ans = f"${ans}$"
+        pred = f"${pred}$"
+        return math_verify.verify(
+                math_verify.parse(ans), 
+                math_verify.parse(pred)
+            ), ""
